@@ -20,7 +20,7 @@ app.post('/insert', async function (req, res) {
    }
    res.sendStatus(200)
 })
-('/search', async function (req, res) {
+app.post('/search', async function (req, res) {
    var results = await findOpportunity(req.body.query);
    console.log(results);
    res.json(results);
