@@ -5,7 +5,7 @@
   "type": "module",
   "main": "scripts/scraper.js",
   "scripts": {
-    "start": "node scripts/scraper.js",
+    "start": "node api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
