@@ -59,6 +59,7 @@ export async function insertToDB(newOpportunity) {
     //mongo will add the _id tag automatically
     //database name = "ESI_VIP_Database"
     //collection name = "Volunteering Opportunities"
+    var error = false;
     try {
         await client.connect();
         const output = await client.db("ESI_VIP_Database").collection("Volunteering Opportunities")
@@ -67,11 +68,13 @@ export async function insertToDB(newOpportunity) {
     }
     catch (e) {
         console.error(e);
+        error = true
     }
     finally {
         await client.close();
     }
     console.log("Item inserted");
+    return error;
 }
 
 export async function findOpportunity(search_terms) {

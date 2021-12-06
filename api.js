@@ -3,6 +3,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 import { findOpportunity } from "./scripts/mongo.js"
 import { findOpportunityByID } from "./scripts/mongo.js"
+import { insertToDB } from "./scripts/mongo.js"
 
 var express = require('express');
 var cors = require('cors');
@@ -12,7 +13,14 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/search', async function (req, res) {
+app.post('/insert', async function (req, res) {
+   var err = await insertToDB(req.body.opportunity)
+   if (err) {
+      res.sendStatus(500)
+   }
+   res.sendStatus(200)
+})
+('/search', async function (req, res) {
    var results = await findOpportunity(req.body.query);
    console.log(results);
    res.json(results);
